@@ -136,7 +136,7 @@ app.get('/search', async (req, res) => {
     if (!query) return res.send(htmlStart);
 
     try {
-        // ❌ VULNERABLE: Direct concatenation
+        // VULNERABLE: Direct concatenation
         const sql = `SELECT * FROM patients WHERE name ILIKE '%${query}%' OR condition ILIKE '%${query}%'`;
         
         console.log("Executing:", sql); // Visible in terminal for video
